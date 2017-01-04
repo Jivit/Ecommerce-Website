@@ -37,7 +37,7 @@
             </div>
             <div class="form">
               <h2>Login to your account</h2>
-              <form action="userlogin" method="post">
+              <form action="loginres" method="post">
                 <input type="text" placeholder="Username" name="username"/>
                 <input type="password" placeholder="Password" name="password"/>
                 <button>Login</button>
@@ -45,19 +45,15 @@
             </div>
             <div class="form">
               <h2>Create an account</h2>
-              <form>
-                <input type="text" placeholder="Username"/>
-                <input type="password" placeholder="Password"/>
-                <input type="email" placeholder="Email Address"/>
-                <input type="tel" placeholder="Phone Number"/>
+              <form action="register" method="post">
+                <input type="text" placeholder="Username" name="username"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <input type="email" placeholder="Email Address" name="mail"/>
+                <input type="tel" placeholder="Phone Number" name="phno"/>
                 <button>Register</button>
               </form>
             </div>
-            <!-- <div class="cta"><a href="http://andytran.me">Forgot your password?</a></div> -->
           </div>
-          <!-- <script src='http://codepen.io/andytran/pen/vLmRVp.js'></script> -->
-
-              <script src="js/index.js"></script>
 </div>
     </div>
 </main>
