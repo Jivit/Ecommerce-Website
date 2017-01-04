@@ -16,13 +16,11 @@ module.exports = function(app){
 						if(err){
 							throw err;
 						}
-						// console.log(doc);
 						products.push(doc);
 					}
 				});
-			count++;
+				count++;
 			}
-			// console.log(products);
 			res.json(products);
 		});
 	});
@@ -67,25 +65,17 @@ module.exports = function(app){
 
 	  	});
 	  	app.post('/loginres',urlencodedParser,function(req, res){
-	  		var username  = req.body.username;
-	    	var pwd = req.body.password;
+	  		var username1  = req.body.username;
+	    	var pwd1 = req.body.password;
 	    	var url = "mongodb://localhost:27017/product_database";
+	    	console.log(username1);
 	    	MongoClient.connect(url,function(err,db){
-						var cursor = db.collection('users').find();
-						var flag = 0;
-						cursor.each(function(err,doc){
-							if(doc != null){
-								console.log(doc.username);
-								if(doc.username == username && doc.password == pwd){
-									flag = 1;
-									res.send('<html><h1>LOG-IN WORKED</h1></html>');
-								}
-							}
-
+						db.collection('users').find({username : username1, password : pwd1}).toArray(function(error, results){
+    						// console.log(results); // output all records
+    						if(results.length == 0) res.send('<html><h1>NOT FOUND</h1></html>');
+							else res.send('<html><h1>LOG-IN WORKED ' + results[0].username +'!!</h1></html>');
 						});
-
-
-					});
+			});
 	  	});
 
 }
