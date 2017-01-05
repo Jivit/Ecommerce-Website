@@ -3,14 +3,35 @@ var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/product_database";
 var products = [ ];
-var count = 0;
 var app = express();
 var assert = require('assert');
+var search = [ ];
 module.exports = function(app){
+	var urlencodedParser = bodyParser.urlencoded({extended: false});
+
+  app.get('/search_data', function(req, res){
+		res.json(search);
+		search = [ ];
+	});
+
+	app.post('/search', urlencodedParser, function(req, res){
+		var item = req.body.item;
+		console.log(item);
+		var url = "mongodb://localhost:27017/product_database";
+		MongoClient.connect(url,function(err,db){
+			   var query = { Name : new RegExp('^' + item) };
+				db.collection('Products').find(query).toArray(function(error, results){
+				  search = results;
+					// console.log(search);
+					res.render('search.ejs');
+				});
+	});
+
+	});
+
 	app.get('/data',function(req,res){
 		MongoClient.connect(url,function(err,db){
-			if(count==0)
-			{	var cursor = db.collection('Products').find();
+				var cursor = db.collection('Products').find();
 				cursor.each(function(err,doc){
 					if(doc != null){
 						if(err){
@@ -19,9 +40,8 @@ module.exports = function(app){
 						products.push(doc);
 					}
 				});
-				count++;
-			}
 			res.json(products);
+			products = [ ];
 		});
 	});
 
@@ -45,7 +65,6 @@ module.exports = function(app){
 			    callback();
 	  		});
 		};
-		var urlencodedParser = bodyParser.urlencoded({extended: false});
 
 		app.post('/register', urlencodedParser, function(req, res) {
 	    	var username  = req.body.username;
