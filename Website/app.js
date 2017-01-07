@@ -6,5 +6,5 @@ var app = express();
 app.set('view engine','ejs');
 app.use(express.static('./public'));
 homecontroller(app);
-app.listen(7999);
+app.listen(3000);
 console.log('listening to port 3k');
