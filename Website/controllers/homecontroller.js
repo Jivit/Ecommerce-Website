@@ -6,6 +6,7 @@ var products = [ ];
 var app = express();
 var assert = require('assert');
 var search = [ ];
+var cookieParser = require('cookie-parser')
 module.exports = function(app){
 	var urlencodedParser = bodyParser.urlencoded({extended: false});
 
@@ -29,8 +30,7 @@ module.exports = function(app){
 
 	});
 
-	app.get('/data',function(req,res){
-		MongoClient.connect(url,function(err,db){
+MongoClient.connect(url,function(err,db){
 				var cursor = db.collection('Products').find();
 				cursor.each(function(err,doc){
 					if(doc != null){
@@ -40,9 +40,12 @@ module.exports = function(app){
 						products.push(doc);
 					}
 				});
-			res.json(products);
+			
 			products = [ ];
 		});
+
+	app.get('/data',function(req,res){
+		res.json(products);
 	});
 
 	app.get('/',function(req,res){
@@ -91,8 +94,14 @@ module.exports = function(app){
 	    	MongoClient.connect(url,function(err,db){
 						db.collection('users').find({username : username1, password : pwd1}).toArray(function(error, results){
     						// console.log(results); // output all records
-    						if(results.length == 0) res.send('<html><h1>NOT FOUND</h1></html>');
-							else res.send('<html><h1>LOG-IN WORKED ' + results[0].username +'!!</h1></html>');
+    						if(results.length == 0) {
+
+    							res.send('<html><h1>NOT FOUND</h1></html>');
+    						}
+							else {
+								res.cookie('login', 'cookievalue', { name: username1});
+								res.send('<html><h1>LOG-IN WORKED ' + results[0].username +'!!</h1></html>');
+							}
 						});
 			});
 	  	});
