@@ -10,7 +10,7 @@ var cookieParser = require('cookie-parser')
 module.exports = function(app){
 	var urlencodedParser = bodyParser.urlencoded({extended: false});
 
-  app.get('/search_data', function(req, res){
+  	app.get('/search_data', function(req, res){
 		res.json(search);
 		search = [ ];
 	});
