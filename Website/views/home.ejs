@@ -24,11 +24,7 @@ app.controller("itemsctrl",['$scope','$http','$cookies','$cookieStore', function
         $scope.shown = false;
 
     $scope.logout = function(){
-        alert("hi");
-//        var date1 = new Date();
-//        date1.setDate(date1.getDate()-1);
-//        $cookies.put('login','cookievalue',{'expires' : date1});
-        delete_cookie('login');
+        $cookieStore.remove('login');
     }
 }]);
 

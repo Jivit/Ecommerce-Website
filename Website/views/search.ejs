@@ -8,13 +8,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
 <script>
 var app = angular.module('s_res', []);
-app.controller("itemsctrl", function($scope, $http) {
+app.controller("itemsctrl", ['$scope', '$cookie', '$http', '$cookieStore', function($scope, $http, $cookies, $cookieStore) {
   $http.get("/search/data").then(function (response) {
       $scope.result = (response.data.length == 0)? false:true;
       $scope.prod = response.data;
-})});
+});
+    var login_cookie = $cookies['login'];
+    if(login_cookie == null){
+        $scope.shown = true;
+    }
+    else
+        $scope.shown = false;
+
+    $scope.logout = function(){
+        $cookieStore.remove('login');
+    }
+}]);
 </script>
 </head>
 <body>

@@ -28,7 +28,7 @@ router.post('/res',urlencodedParser,function(req, res){
                 res.send('<html><h1>NOT FOUND</h1></html>');
             }
             else {
-                res.cookie('login', 'cookievalue', { name: username1});
+                res.cookie('login', 'cookievalue', { name: username1 });
                 res.send('<html><h1>LOG-IN WORKED ' + results[0].username +'!!</h1></html>');
             }
         });
