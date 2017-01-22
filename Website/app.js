@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var login = require('./routes/login');
-var register = require('./routers/register');
-var search = require('./routers/search');
+var register = require('./routes/register');
+var search = require('./routes/search');
 
 var app = express();
 
