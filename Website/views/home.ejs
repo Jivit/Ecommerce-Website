@@ -1,0 +1,57 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="./assets/search.css" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+<script>
+var app = angular.module('home', ['ngCookies']);
+app.controller("itemsctrl",['$scope','$http','$cookies','$cookieStore', function($scope,$http,$cookies,$cookieStore){
+  $http.get("/data").then(function (response) {
+      $scope.prod = response.data;
+    });
+    var login_cookie = $cookies['login'];
+    if(login_cookie == null){
+        $scope.shown = true;
+    }
+    else
+        $scope.shown = false;
+
+    $scope.logout = function(){
+        alert("hi");
+//        var date1 = new Date();
+//        date1.setDate(date1.getDate()-1);
+//        $cookies.put('login','cookievalue',{'expires' : date1});
+        delete_cookie('login');
+    }
+}]);
+
+</script>
+</head>
+<body ng-app='home' ng-controller='itemsctrl'>
+<% include nav.ejs %>
+
+<main class="mdl-layout__content">
+    <div class="page-content">
+<div>
+  <br>
+  <br>
+
+<div class = "row">
+	<div class="col-sm-4"  ng-repeat="x in prod" >
+	        <p align="center" style='font-size: 12px;border: 1px solid #333;'><img src= '{{x.Image}}'><br>{{ x.Name }}</p>
+	</div>
+</div>
+
+</div>
+    </div>
+</main>
+
+</body>
+</html>

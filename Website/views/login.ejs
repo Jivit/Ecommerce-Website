@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Flat Login Form 3.0</title>
+            <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+
+      
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./assets/style.css" type="text/css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+</head>
+<script>
+var app = angular.module('toggle', ['ngCookies']);
+app.controller("switchform",['$scope','$cookies','$cookieStore', function($scope,$cookies,$cookieStore){
+      $scope.form1 = true;
+      $scope.form2 = false;
+      $scope.togglenow = function(){
+        $scope.form1 = !$scope.form1;
+        $scope.form2 = !$scope.form2;
+      }
+    var login_cookie = $cookies['login'];
+    if(login_cookie == null){
+        $scope.shown = true;
+    }
+    else
+        $scope.shown = false;
+    $scope.logout = function(){
+        alert("hi");
+//        var date1 = new Date();
+//        date1.setDate(date1.getDate()-1);
+//        $cookies.put('login','cookievalue',{'expires' : date1});
+        delete_cookie('login');
+    }
+}]);
+</script>
+<body ng-app='toggle' ng-controller="switchform">
+<% include nav.ejs %>
+  
+<!-- Form Mixin-->
+<!-- Input Mixin-->
+<!-- Button Mixin-->
+<!-- Pen Title-->
+<main class="mdl-layout__content">
+    <div class="page-content">
+          <div class="pen-title">
+            <h1> Login </h1>  
+          </div>
+          <!-- Form Module-->
+          <div class="module form-module">
+            <div class="toggle" ng-click="togglenow()"><i class="fa fa-times fa-pencil"></i>
+              <div class="tooltip">Sign Up</div>
+            </div>
+            <div class="form" ng-show="form1">
+              <h2>Login to your account</h2>
+              <form action="login/res" method="post">
+                <input type="text" placeholder="Username" name="username"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <button>Login</button>
+              </form>
+            </div>
+            <div class="form" ng-show="form2">
+              <h2>Create an account</h2>
+              <form action="register" method="post">
+                <input type="text" placeholder="Username" name="username"/>
+                <input type="password" placeholder="Password" name="password"/>
+                <input type="email" placeholder="Email Address" name="mail"/>
+                <input type="tel" placeholder="Phone Number" name="phno"/>
+                <button>Register</button>
+              </form>
+            </div>
+          </div>
+</div>
+    </div>
+</main>
+</body>
+</html>
