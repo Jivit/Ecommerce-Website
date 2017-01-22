@@ -13,9 +13,7 @@
 <script>
 var app = angular.module('home', ['ngCookies']);
 app.controller("itemsctrl",['$scope','$http','$cookies','$cookieStore', function($scope,$http,$cookies,$cookieStore){
-  $http.get("/data").then(function (response) {
-      $scope.prod = response.data;
-    });
+    
     var login_cookie = $cookies['login'];
     if(login_cookie == null){
         $scope.shown = true;
@@ -26,24 +24,28 @@ app.controller("itemsctrl",['$scope','$http','$cookies','$cookieStore', function
     $scope.logout = function(){
         $cookieStore.remove('login');
     }
-
-    $scope.addcart = function(x){
-        // alert(x.Name);
-        var result = {
-            "user" : login_cookie,
-            "_id" : x._id,
-            "Image" : x.Image, 
-            "Price" : x.Price, 
-            "Orig_price" : x.Orig_price, 
-            "Name" : x.Name
-        };
-        console.log(result);
-        $http.post("/additem",result).success(function () {
-                alert("Posted Data!");
-            }).error(function (data, status, header, config) {
-                alert("error in posting");
-            });
-    }
+    var result = {user:login_cookie};
+    $http.post("/cart/data",result).then(function (response) {
+      $scope.prod = response.data;
+    });
+    $scope.name = login_cookie;
+    // $scope.addcart = function(x){
+    //     // alert(x.Name);
+    //     var result = {
+    //         "user" : login_cookie,
+    //         "_id" : x._id,
+    //         "Image" : x.Image, 
+    //         "Price" : x.Price, 
+    //         "Orig_price" : x.Orig_price, 
+    //         "Name" : x.Name
+    //     };
+    //     console.log(result);
+    //     $http.post("/additem",result).success(function () {
+    //             alert("Posted Data!");
+    //         }).error(function (data, status, header, config) {
+    //             alert("error in posting");
+    //         });
+    // }
 
 }]);
 
@@ -57,13 +59,11 @@ app.controller("itemsctrl",['$scope','$http','$cookies','$cookieStore', function
 <div>
   <br>
   <br>
-
+<h1 ng-model="name">Hello {{name}} !! </h1> 
 <div class = "row">
 	<div class="col-sm-4"  ng-repeat="x in prod" >
-	        <p align="center" style='font-size: 12px;border: 1px solid #333;'><img src= '{{x.Image}}'><br>{{ x.Name }}<br>
-                <button ng-hide="shown" style="align-self: center;margin-bottom: 12px;" ng-click="addcart(x)" >Add To Cart</button>
+	        <p align="center" style='font-size: 12px;border: 1px solid #333;'><img src= '{{x.Image}}'><br>{{ x.Name }}
             </p>
-
 	</div>
 </div>
 

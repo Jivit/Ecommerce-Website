@@ -10,10 +10,11 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <a class="mdl-navigation__link" href="/">HOME</a>
         <a ng-show="shown" class="mdl-navigation__link" href="/login">LOG IN</a>
+        <a ng-hide="shown" class="mdl-navigation__link" href="/cart" ng-click="cart()">VIEW CART</a>
         <a ng-hide="shown" class="mdl-navigation__link" href="/" ng-click="logout()">LOG OUT</a>
         <form align='center' method = "post" action = "search">
-              <input type="text" placeholder="Search" name="item"/>
-              <button type='submit'>Search</button>
+              <input type="text" placeholder="Search" name="item" style="color: black;"/>
+              <button type='submit' style="color: black;">Search</button>
         </form>
       </nav>
     </div>
