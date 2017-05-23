@@ -31,4 +31,13 @@ node Website/bin/www
 Open any browser and go to localhost:7999.
 
 
+### Working 
+
+###### Login
+
+! [/Website/images/Login.png]
+
+###### Product display
+
+! [Website/images/Products.png]
 
