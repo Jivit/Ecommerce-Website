@@ -12,19 +12,21 @@
     "express": "~4.14.0",
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "ejs" : "~2.5.5",
+    "mongodb" : "~2.2.21"
   },
   "description": "A Ecommerce website implemented with all basic functionalities",
   "main": "bin/www.js",
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vilas897/MEAN-Stack-Project.git"
+    "url": "git+https://github.com/vilas897/Ecommerce-Website.git"
   },
   "author": "Arvind Sai K and Vilas M",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/vilas897/MEAN-Stack-Project/issues"
+    "url": "https://github.com/vilas897/Ecommerce-Website/issues"
   },
-  "homepage": "https://github.com/vilas897/MEAN-Stack-Project#readme"
+  "homepage": "https://github.com/vilas897/Ecommerce-Website#readme"
 }
