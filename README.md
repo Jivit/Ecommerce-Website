@@ -18,14 +18,12 @@ https://nodejs.org/
 
 ```
 npm install
-
 ```
 
 ### Runnning the server
 
 ```
 node Website/bin/www
-
 ```
 
 Open any browser and go to localhost:7999.
@@ -35,9 +33,9 @@ Open any browser and go to localhost:7999.
 
 ###### Login
 
-! [/Website/images/Login.png]
+![Login](Website/images/Login.png)
 
 ###### Product display
 
-! [/Website/images/Products.png]
+![Products](Website/images/Products.png)
 
