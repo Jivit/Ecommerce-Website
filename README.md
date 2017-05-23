@@ -39,5 +39,5 @@ Open any browser and go to localhost:7999.
 
 ###### Product display
 
-! [Website/images/Products.png]
+! [/Website/images/Products.png]
 
